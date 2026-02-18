@@ -33,6 +33,12 @@ async function ensureDataDir() {
 
 // ========== API 路由 ==========
 
+function parseDaysQuery(rawDays, defaultDays) {
+  const parsedDays = Number.parseInt(rawDays, 10);
+  if (Number.isNaN(parsedDays)) return defaultDays;
+  return Math.min(365, Math.max(1, parsedDays));
+}
+
 // 获取所有宿舍列表
 app.get('/api/dormitories', (req, res) => {
   res.json({
@@ -70,7 +76,7 @@ app.get('/api/dormitories/:id/latest', async (req, res) => {
 app.get('/api/dormitories/:id/history', async (req, res) => {
   try {
     const { id } = req.params;
-    const days = parseInt(req.query.days) || 30;
+    const days = parseDaysQuery(req.query.days, 30);
     const data = await getDormitoryHistory(id, days);
     
     res.json({
@@ -89,7 +95,7 @@ app.get('/api/dormitories/:id/history', async (req, res) => {
 app.get('/api/dormitories/:id/hourly', async (req, res) => {
   try {
     const { id } = req.params;
-    const days = parseInt(req.query.days) || 7;
+    const days = parseDaysQuery(req.query.days, 7);
     const historyData = await getDormitoryHistory(id, days);
     
     // 按小时分组统计

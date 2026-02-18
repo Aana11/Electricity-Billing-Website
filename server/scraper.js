@@ -97,7 +97,8 @@ async function fetchDormitoryData(session, dormitory) {
           deviceInfo: {
             deviceName: device.DeviceName,
             deviceType: device.DeviceTypeName,
-            deviceNo: device.DevcieNo,
+            // 线上字段存在历史拼写错误 `DevcieNo`，兼容两种写法
+            deviceNo: device.DeviceNo ?? device.DevcieNo ?? '',
             deviceBalance: device.DeviceBalance,
             updateTime: device.UpdateTime,
             isOnline: device.IsOnline === 1,
@@ -277,5 +278,8 @@ module.exports = {
   getDormitoryHistory,
   getLatestData,
   addDormitory,
-  DORMITORIES
+  DORMITORIES,
+  __testables: {
+    fetchDormitoryData
+  }
 };
