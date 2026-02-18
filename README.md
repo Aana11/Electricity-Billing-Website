@@ -155,7 +155,7 @@ Tools > Device Manager
 点击 Run 按钮 或 Shift+F10
 ```
 
-详细部署指南请参考 [DEPLOY_GUIDE.md](./DEPLOY_GUIDE.md)
+详细部署指南请参考 [harmonyos/DEPLOY_GUIDE.md](./harmonyos/DEPLOY_GUIDE.md)
 
 ---
 
@@ -164,7 +164,7 @@ Tools > Device Manager
 构建完成后，HAP 包位于：
 
 ```
-entry/build/default/outputs/default/entry-default-signed.hap
+harmonyos/entry/build/default/outputs/default/entry-default-signed.hap
 ```
 
 安装方式：
